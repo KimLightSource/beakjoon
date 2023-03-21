@@ -2,32 +2,30 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        double totalScore = 0;
-        double totalCredit = 0;
-        for (int i = 0; i < 20; i++) {
-            String subject = sc.next();
-            double credit = sc.nextDouble();
-            String score = sc.next();
-            if (score.equals("A+")) {
-                totalScore = totalScore + (credit * 4.5);
-                totalCredit = totalCredit+credit;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char[][] sa = new char[5][15];
+        int max = 0;
+        for (int i = 0; i < sa.length; i++) {
+            String s = br.readLine();
+            if(max<s.length()) max = s.length();
+
+            for (int j = 0; j < s.length(); j++) {
+                sa[i][j] = s.charAt(j);
             }
-            else if (score.equals("A0")) {totalScore = totalScore + (credit * 4.0); totalCredit = totalCredit+credit;}
-            else if (score.equals("B+")) {totalScore = totalScore + (credit * 3.5); totalCredit = totalCredit+credit;}
-            else if (score.equals("B0")) {totalScore = totalScore + (credit * 3.0); totalCredit = totalCredit+credit;}
-            else if (score.equals("C+")) {totalScore = totalScore + (credit * 2.5); totalCredit = totalCredit+credit;}
-            else if (score.equals("C0")) {totalScore = totalScore + (credit * 2.0); totalCredit = totalCredit+credit;}
-            else if (score.equals("D+")) {totalScore = totalScore + (credit * 1.5); totalCredit = totalCredit+credit;}
-            else if (score.equals("D0")) {totalScore = totalScore + (credit * 1.0); totalCredit = totalCredit+credit;}
-            else if (score.equals("F")) {totalScore = totalScore + (credit * 0); totalCredit = totalCredit+credit;}
-            else if (score.equals("P") ) totalScore = totalScore;
         }
-        System.out.println(totalScore /totalCredit);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < max; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(sa[j][i] == '\0') continue;
+                sb.append(sa[j][i]);
+            }
+        }
+        System.out.println(sb);
+        }
 
 
     }
-}
