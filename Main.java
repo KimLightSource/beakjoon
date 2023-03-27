@@ -6,26 +6,22 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        char[][] sa = new char[5][15];
-        int max = 0;
-        for (int i = 0; i < sa.length; i++) {
-            String s = br.readLine();
-            if(max<s.length()) max = s.length();
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        String answer = "";
+        while (a != b) {
+            if (b % a == 0) answer = "factor";
+            else if (a % b == 0) answer = "multiple";
+            else answer = "neither";
+            System.out.println(answer);
+            a = sc.nextInt();
+            b = sc.nextInt();
 
-            for (int j = 0; j < s.length(); j++) {
-                sa[i][j] = s.charAt(j);
-            }
         }
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < max; i++) {
-            for (int j = 0; j < 5; j++) {
-                if(sa[j][i] == '\0') continue;
-                sb.append(sa[j][i]);
-            }
-        }
-        System.out.println(sb);
-        }
+
+
+    }
 
 
     }
