@@ -6,20 +6,26 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int i = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int answer = 0;
-        for (int a = 0; a < i; a++) {
-            int b = Integer.parseInt(st.nextToken());
+        int a = Integer.parseInt(br.readLine());
+        int b = Integer.parseInt(br.readLine());
+        int min = 0;
+        int sum= 0;
+        for (int i = b; i >= a; i--) {
             int count = 0;
-            for (int j = 1; j <= b; j++) {
-                if (b % j == 0) count ++;
+            for (int j = 1; j <= i; j++) {
+                if (i % j == 0) count ++;
             }
-            if (count == 2 ) answer++;
+            if (count == 2) {
+                sum = sum + i;
+                min = i;
+            }
         }
-
-        System.out.println(answer);
-
+        if (sum != 0) {
+            System.out.println(sum);
+            System.out.println(min);
+        } else if (sum == 0) {
+            System.out.println(-1);
+        }
     }
 
 
