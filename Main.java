@@ -6,22 +6,21 @@ import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        String answer = "";
-        while (a != b) {
-            if (b % a == 0) answer = "factor";
-            else if (a % b == 0) answer = "multiple";
-            else answer = "neither";
-            System.out.println(answer);
-            a = sc.nextInt();
-            b = sc.nextInt();
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int i = Integer.parseInt(st.nextToken());
+        int j = Integer.parseInt(st.nextToken());
+        int count = 0;
+        for (int a = 1; a <= i; a++) {
+            if (i % a == 0) count++;
+            if (count == j) {
+                System.out.println(a);
+                break;
+            }
         }
-
-
-    }
-
+        if (count < j) System.out.println(0);
 
     }
+
+
+}
