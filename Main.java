@@ -6,26 +6,19 @@ import java.util.StringTokenizer;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int i = 0;
-        while (true) {
-            String answer = "";
-            int b = 0;
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            i = Integer.parseInt(st.nextToken());
-            if (i == -1) break;
-            answer = i+" = 1";
-            for (int a = 2; a < i; a++) {
-                if (i % a == 0) b = a + b;
+        int i = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int answer = 0;
+        for (int a = 0; a < i; a++) {
+            int b = Integer.parseInt(st.nextToken());
+            int count = 0;
+            for (int j = 1; j <= b; j++) {
+                if (b % j == 0) count ++;
             }
-            if (i == b+1) {
-                for (int a = 2; a < i; a++) {
-                    if (i % a == 0) {answer = answer + " + " +a ; }
-            }} else if (i != b+1) {
-                answer = i + " is NOT perfect.";
-            }
-            System.out.println(answer);
+            if (count == 2 ) answer++;
         }
 
+        System.out.println(answer);
 
     }
 
