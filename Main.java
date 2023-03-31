@@ -1,27 +1,31 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int a = Integer.parseInt(new StringTokenizer(br.readLine()).nextToken());
-        int three = 0;
-        int five = 0;
-        for (int i = a / 5; i >= 0; i--) {
-            int b = a;
-            b = b - (i*5);
-            if(b % 3 == 0) {
-                three = b / 3;
-                five = i;
-                break;
-            }
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        HashMap<String, Integer> map = new HashMap<>();
+        ArrayList<Object> list = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int i = Integer.parseInt(st.nextToken());
+        int j = Integer.parseInt(st.nextToken());
+        for (int a = 1; a <= i; a++) {
+            String s = br.readLine();
+            map.put(s, a);
+            list.add(s);
         }
-        if (three == 0 && five == 0) {
-            System.out.println(-1);
-        } else {
-            System.out.println(three+five);
+        for (int a = 1; a <= j; a++) {
+            String s = br.readLine();
+            if (map.containsKey(s)) sb.append(map.get(s)).append("\n");
+            else {
+                sb.append(list.get(Integer.parseInt(s)-1)).append("\n");}
         }
-        }
-        }
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+        br.close();
+    }
+}
+
