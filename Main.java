@@ -3,41 +3,77 @@ import java.sql.Array;
 import java.util.*;
 
 public class Main {
+
+    public static int[] stack;
+    public static int size = 0;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int i = Integer.parseInt(br.readLine());
-        int[] j = new int[i];
+        StringBuilder sb = new StringBuilder();
+        stack = new int[i];
         for (int a = 0; a < i; a++) {
-            j[a] = Integer.parseInt(br.readLine());
-        }
-        ArrayList<Integer> agbs = new ArrayList<>();
-        for (int a = 0; a < j.length - 2; a++) {
-            int b = j[a + 1] - j[a];
-            int c = j[a + 2] - j[a + 1];
-            while (c > 0) {
-                int temp = b;
-                b = c;
-                c = temp%c;
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+            String s = st.nextToken();
+            switch (s) {
+                case "push":
+                    push(Integer.parseInt(st.nextToken()));
+                    break;
+                case "top":
+                    sb.append(top()).append("\n");
+                    break;
+                case "size":
+                    sb.append(size()).append("\n");
+                    break;
+                case "empty":
+                    sb.append(empty()).append("\n");
+                    break;
+                case "pop":
+                    sb.append(pop()).append("\n");
+                    break;
             }
-            agbs.add(b);
-        }
-        Integer agb = agbs.stream().min(Comparator.comparing(x -> x)).get();
-        int answer = 0;
-        int count = j[0];
-        for (int a = 1; a < j.length; a++) {
-            count = count + agb;
-            if (count != j[a]) {
-                answer++;
-                a--;
-            } else continue;
-
         }
 
-        bw.write(String.valueOf(answer));
+        bw.write(sb.toString());
         bw.flush();
         bw.close();
         br.close();
+    }
+
+    public static void push(int item) {
+        stack[size] = item;
+        size++;
+    }
+
+    public static int pop() {
+        if (size == 0) {
+            return -1;
+        } else {
+            int num = stack[size - 1];
+            size--;
+            return num;
+        }
+    }
+
+    public static int size() {
+        return size;
+    }
+
+    public static int empty() {
+        if (size == 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static int top() {
+        if (size == 0) {
+            return -1;
+        } else {
+            return stack[size-1];
+        }
     }
 }
 
