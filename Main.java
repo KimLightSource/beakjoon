@@ -6,29 +6,33 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int i = Integer.parseInt(br.readLine());
+        String s = br.readLine();
         StringBuilder sb = new StringBuilder();
-
-        for (int a = 0; a < i; a++) {
+        while (!s.equals(".")) {
             Stack<Character> stack = new Stack<>();
-            char[] chars = br.readLine().toCharArray();
-            String s = "YES";
-            for (char c : chars) {
+            String answer = "yes";
+            for (char c : s.toCharArray()) {
                 if (c == '(') {
-                    stack.push(c);
-                }
-                else if (c == ')' && stack.isEmpty()) {
-                    s = "NO";
-                    break;
-                }
-                else {
-                    stack.pop();
+                    stack.push('(');
+                } else if (c == '[') {
+                    stack.push('[');
+                } else if (c == ')') {
+                    if (stack.isEmpty()) {
+                        answer = "no";
+                        break;
+                    }
+                    if (stack.pop() != '(') {answer = "no"; break;}
+                }else if (c == ']') {
+                    if (stack.isEmpty()) {
+                        answer = "no";
+                        break;
+                    }
+                    if (stack.pop() != '[') {answer = "no"; break;}
                 }
             }
-            if (!stack.isEmpty()) {
-                s = "NO";
-            }
-            sb.append(s).append("\n");
+            if (!stack.isEmpty()) answer = "no";
+            sb.append(answer).append("\n");
+            s= br.readLine();
         }
         bw.write(sb.toString());
         bw.flush();
