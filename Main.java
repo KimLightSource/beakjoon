@@ -1,31 +1,20 @@
-import java.io.*;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int i = Integer.parseInt(br.readLine());
-        StringBuilder sb = new StringBuilder();
-        Queue<Integer> queue = new LinkedList<>();
-        for (int a = 1; a <= i; a++) {
-            queue.offer(a);
+        String s = br.readLine();
+        for (int i = 0; i < Integer.parseInt(s); i++) {
+            String s1 = br.readLine();
+            BigInteger num = new BigInteger(s1);
+            while (!num.isProbablePrime(10)){
+                num = num.add(BigInteger.valueOf(1));
+            }
+            System.out.println(num);
         }
-        while (queue.size() > 1) {
-            queue.remove();
-            Integer remove = queue.remove();
-            queue.offer(remove);
-        }
-        sb.append(queue.remove());
-        bw.write(sb.toString());
-        bw.flush();
-        bw.close();
-        br.close();
     }
 
-
-
 }
-
