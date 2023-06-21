@@ -1,20 +1,36 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.lang.ref.PhantomReference;
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String s = br.readLine();
-        for (int i = 0; i < Integer.parseInt(s); i++) {
-            String s1 = br.readLine();
-            BigInteger num = new BigInteger(s1);
-            while (!num.isProbablePrime(10)){
-                num = num.add(BigInteger.valueOf(1));
+
+
+class Solution {
+    public int solution(int number, int limit, int power) {
+        int answer = 0;
+        for (int i = 1; i <= number; i++) {
+            int sqrt = (int) Math.sqrt(i);
+            int count = 0;
+            for (int j = 1; j <= sqrt; j++) {
+                if (i % j == 0) {
+                    count++;
+                    if (i / j != j) {
+                        count++;
+                    }
+                }
             }
-            System.out.println(num);
+            if (count > limit) answer = answer + power;
+            else answer = answer + count;
         }
+        return answer;
     }
+}
+public class Main {
 
+    public static void main(String[] args) throws IOException {
+        Solution s = new Solution();
+        s.solution();
+    }
 }
