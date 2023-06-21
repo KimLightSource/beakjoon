@@ -1,29 +1,19 @@
 import java.io.IOException;
 import java.lang.ref.PhantomReference;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 
 
 class Solution {
-    public int solution(int number, int limit, int power) {
+    public int solution(String s) {
         int answer = 0;
-        for (int i = 1; i <= number; i++) {
-            int sqrt = (int) Math.sqrt(i);
-            int count = 0;
-            for (int j = 1; j <= sqrt; j++) {
-                if (i % j == 0) {
-                    count++;
-                    if (i / j != j) {
-                        count++;
-                    }
-                }
-            }
-            if (count > limit) answer = answer + power;
-            else answer = answer + count;
+        String[] alpha= {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        String[] num= {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        int a= 0;
+        for (String alp : alpha) {
+            s = s.replaceAll(alp, num[a++]);
         }
+         answer = Integer.parseInt(s);
         return answer;
     }
 }
@@ -31,6 +21,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Solution s = new Solution();
-        s.solution();
+        s.solution( "one4seveneight");
     }
 }
